@@ -1,0 +1,14 @@
+### Composer ###
+bin/
+vendor/
+
+### PhpStorm ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+
+## Directory-based project format
+.idea/
+
+## File-based project format
+*.ipr
+*.iws
+*.iml
