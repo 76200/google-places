@@ -32,8 +32,4 @@ class GooglePlacesTest extends PHPUnit_Framework_TestCase
         new GooglePlaces([]);
     }
 
-    public function testConstructor()
-    {
-
-    }
 }
