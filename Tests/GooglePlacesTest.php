@@ -27,9 +27,25 @@ class GooglePlacesTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testConstructorInvalidArgument()
+    public function testConstructorInvalidArgument1()
     {
         new GooglePlaces([]);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testConstructorInvalidArgument2()
+    {
+        new GooglePlaces(2);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testConstructorInvalidArgument3()
+    {
+        new GooglePlaces(null);
     }
 
 }
