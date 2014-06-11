@@ -7,7 +7,6 @@ use bart\GooglePlaces\GooglePlaces;
  */
 class GooglePlacesTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @expectedException bart\GooglePlaces\Exception\APIKeyException
      */
