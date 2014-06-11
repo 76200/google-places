@@ -1,11 +1,12 @@
 <?php
 
 namespace bart\GooglePlaces\Search;
+use bart\GooglePlaces\Interfaces\SearchInterface;
 
 /**
  * PlaceSearch
  */
-abstract class PlaceSearch extends Places
+abstract class PlaceSearch extends Places implements SearchInterface
 {
     /**
      * The maximum allowed radius is 50 000 meters
