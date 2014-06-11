@@ -2,26 +2,29 @@
 
 namespace bart\GooglePlaces;
 
+use bart\GooglePlaces\Converter\NearbySearchConverter;
 use bart\GooglePlaces\Exception\APIKeyException;
+use bart\GooglePlaces\Result\SearchResult;
 
 /**
  * Class GooglePlaces
  */
 class GooglePlaces
 {
+    /**
+     * Base GooglePlacesAPI URL
+     */
     const API_URL = 'https://maps.googleapis.com/maps/api/place';
+
+    /**
+     * "nearbysearch" method partial URL
+     */
+    const NEARBY_URL = 'nearbysearch';
 
     /**
      * @var string
      */
     private $apiKey;
-
-    /**
-     * When true, returned objects will be converted into associative arrays.
-     *
-     * @var bool
-     */
-    private $assoc = false;
 
     /**
      * Constructor.
@@ -41,36 +44,30 @@ class GooglePlaces
         $this->apiKey = $apiKey;
     }
 
-    public function nearbySearch($location, $radius, $sensor, array $parameters = [])
+    /**
+     * @param array $location   Latitude and Longitude
+     * @param int $radius       Radius in meters
+     * @param bool $sensor      Indicates whether or not the Place request came from a device using a location sensor
+     * @param array $parameters Optional parameters
+     *
+     * @return SearchResult
+     */
+    public function nearbySearch(array $location, $radius, $sensor, array $parameters = [])
     {
-        $nearbySearch = new NearbySearch($parameters + [
+        $converter = new NearbySearchConverter($parameters + [
             'location' => $location,
             'radius' => $radius,
-            'sensor' => $sensor
+            'sensor' => $sensor,
+            'key' => $this->apiKey
           ]
         );
 
-        return $nearbySearch->getQuery($this->assoc);
-    }
+        $params = $converter->convert();
 
-    /**
-     * @return boolean
-     */
-    public function isAssoc()
-    {
-        return $this->assoc === true;
-    }
+        $query = sprintf('%s/%s/json?%s', self::API_URL, self::NEARBY_URL, rawurldecode(http_build_query($params)));
+        $response = file_get_contents($query);
 
-    /**
-     * @param boolean $assoc
-     *
-     * @return $this
-     */
-    public function setAssoc($assoc)
-    {
-        $this->assoc = $assoc;
-
-        return $this;
+        return new SearchResult($response);
     }
 
 }
