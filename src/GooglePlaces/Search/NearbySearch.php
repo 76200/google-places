@@ -11,6 +11,8 @@ use bart\GooglePlaces\Result\SearchResult;
 class NearbySearch extends PlaceSearch
 {
     /**
+     * Executes Nearby Search
+     *
      * @return SearchResult
      */
     public function execute()
