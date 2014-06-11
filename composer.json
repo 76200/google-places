@@ -1,21 +1,23 @@
 {
-  "name": "bart/google-places",
-  "description": "PHP wrapper for Google Places API",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Bartłomiej Czyż",
-      "email": "bartek@czyz.it",
-      "role": "developer"
+    "name": "bart/google-places",
+    "type": "library",
+    "description": "PHP wrapper for Google Places API",
+    "keywords": ["google", "places", "googleplaces", "wrapper", "api", "php"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bartłomiej Czyż",
+            "email": "bartek@czyz.it",
+            "role": "developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "bart\\": "src/"
+        }
+    },
+    "version": "0.0.1",
+    "require": {
+        "php": ">=5.4"
     }
-  ],
-  "autoload": {
-    "psr-4": {
-      "bart\\": "src/"
-    }
-  },
-  "version": "0.0.1",
-  "require": {
-    "php": ">=5.4"
-  }
 }
