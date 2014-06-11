@@ -1,2 +1,2 @@
-GooglePlacesAPI wrapper
+Google Places API Wrapper
 =======================
