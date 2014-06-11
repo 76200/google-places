@@ -6,9 +6,9 @@ use bart\GooglePlaces\Converter\NearbySearchConverter;
 use bart\GooglePlaces\Result\SearchResult;
 
 /**
- * NearbySearch
+ * TextSearch
  */
-class NearbySearch extends PlaceSearch
+class TextSearch extends PlaceSearch
 {
     /**
      * @return SearchResult

@@ -5,7 +5,7 @@ namespace bart\GooglePlaces\Search;
 /**
  * PlaceSearch
  */
-abstract class PlaceSearch
+abstract class PlaceSearch extends Places
 {
     /**
      * The maximum allowed radius is 50 000 meters
@@ -36,5 +36,18 @@ abstract class PlaceSearch
      * Price level - very expensive
      */
     const PRICE_VERY_EXPENSIVE = 4;
+
+    /**
+     * @var array Query parameters
+     */
+    protected $parameters;
+
+    /**
+     * @param array $parameters
+     */
+    function __construct(array $parameters)
+    {
+        $this->parameters = $parameters;
+    }
 
 }

@@ -2,25 +2,15 @@
 
 namespace bart\GooglePlaces;
 
-use bart\GooglePlaces\Converter\NearbySearchConverter;
 use bart\GooglePlaces\Exception\APIKeyException;
 use bart\GooglePlaces\Result\SearchResult;
+use bart\GooglePlaces\Search;
 
 /**
  * Class GooglePlaces
  */
 class GooglePlaces
 {
-    /**
-     * Base GooglePlacesAPI URL
-     */
-    const API_URL = 'https://maps.googleapis.com/maps/api/place';
-
-    /**
-     * "nearbysearch" method partial URL
-     */
-    const NEARBY_URL = 'nearbysearch';
-
     /**
      * @var string
      */
@@ -31,7 +21,7 @@ class GooglePlaces
      *
      * @param string $apiKey
      *
-     * @throws \InvalidArgumentException | APIKeyException
+     * @throws \InvalidArgumentException|APIKeyException
      */
     function __construct($apiKey)
     {
@@ -45,6 +35,8 @@ class GooglePlaces
     }
 
     /**
+     * Executes Nearby Search
+     *
      * @param array $location   Latitude and Longitude
      * @param int $radius       Radius in meters
      * @param bool $sensor      Indicates whether or not the Place request came from a device using a location sensor
@@ -54,7 +46,7 @@ class GooglePlaces
      */
     public function nearbySearch(array $location, $radius, $sensor, array $parameters = [])
     {
-        $converter = new NearbySearchConverter($parameters + [
+        $search = new Search\NearbySearch($parameters + [
             'location' => $location,
             'radius' => $radius,
             'sensor' => $sensor,
@@ -62,12 +54,7 @@ class GooglePlaces
           ]
         );
 
-        $params = $converter->convert();
-
-        $query = sprintf('%s/%s/json?%s', self::API_URL, self::NEARBY_URL, rawurldecode(http_build_query($params)));
-        $response = file_get_contents($query);
-
-        return new SearchResult($response);
+        return $search->execute();
     }
 
 }
