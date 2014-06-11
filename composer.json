@@ -14,6 +14,7 @@
       "bart\\": "src/"
     }
   },
+  "version": "0.0.1",
   "require": {
     "php": ">=5.4"
   }
