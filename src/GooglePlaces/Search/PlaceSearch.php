@@ -1,6 +1,7 @@
 <?php
 
 namespace bart\GooglePlaces\Search;
+
 use bart\GooglePlaces\Interfaces\SearchInterface;
 
 /**
