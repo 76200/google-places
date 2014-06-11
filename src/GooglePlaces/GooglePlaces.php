@@ -17,6 +17,11 @@ class GooglePlaces
     private $apiKey;
 
     /**
+     * @var string Next page token
+     */
+    private $nextPageToken = null;
+
+    /**
      * Constructor.
      *
      * @param string $apiKey
@@ -38,8 +43,8 @@ class GooglePlaces
      * Executes Nearby Search
      *
      * @param array $location   Latitude and Longitude
-     * @param int $radius       Radius in meters
-     * @param bool $sensor      Indicates whether or not the Place request came from a device using a location sensor
+     * @param int   $radius     Radius in meters
+     * @param bool  $sensor     Indicates whether or not the Place request came from a device using a location sensor
      * @param array $parameters Optional parameters
      *
      * @return SearchResult
@@ -47,14 +52,31 @@ class GooglePlaces
     public function nearbySearch(array $location, $radius, $sensor, array $parameters = [])
     {
         $search = new Search\NearbySearch($parameters + [
-            'location' => $location,
-            'radius' => $radius,
-            'sensor' => $sensor,
-            'key' => $this->apiKey
-          ]
+                'location' => $location,
+                'radius' => $radius,
+                'sensor' => $sensor,
+                'key' => $this->apiKey
+            ]
         );
+        $result = $search->execute();
+        $this->nextPageToken = $result->getNextPageToken();
 
-        return $search->execute();
+        return $result;
+    }
+
+    /**
+     * @return SearchResult
+     */
+    public function next()
+    {
+        $search = new Search\NextPage([
+            'pagetoken' => $this->nextPageToken,
+            'key' => $this->apiKey
+        ]);
+        $result = $search->execute();
+        $this->nextPageToken = $result->getNextPageToken();
+
+        return $result;
     }
 
 }

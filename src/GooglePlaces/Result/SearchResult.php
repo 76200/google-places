@@ -31,6 +31,18 @@ class SearchResult
     }
 
     /**
+     * Returns next_page_token
+     *
+     * @return null|string
+     */
+    public function getNextPageToken()
+    {
+        $result = $this->arrayResult();
+
+        return isset($result['next_page_token']) ? $result['next_page_token'] : null;
+    }
+
+    /**
      * @return array
      */
     public function arrayResult()
@@ -53,4 +65,5 @@ class SearchResult
     {
         return $this->result;
     }
+
 }
