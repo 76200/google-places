@@ -13,7 +13,7 @@
         syntaxCheck                 = "false"
         bootstrap                   = "vendor/autoload.php" >
     <logging>
-        <log type="coverage-clover" target="build/logs/coverage.xml" />
+        <log type="coverage-clover" target="build/logs/clover.xml" />
     </logging>
 
     <testsuites>
