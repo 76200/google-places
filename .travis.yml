@@ -13,5 +13,5 @@ script:
   - mkdir -p build/logs
   - phpunit -c phpunit.xml
 
-after_success:
-  - php ./vendor/bin/coveralls --config .coveralls.yml -v
+after_script:
+  - php vendor/bin/coveralls -v
