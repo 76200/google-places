@@ -65,6 +65,29 @@ class GooglePlaces
     }
 
     /**
+     * Executes Text Search
+     *
+     * @param string $query      The text string on which to search
+     * @param bool   $sensor     Indicates whether or not the Place request came from a device using a location sensor
+     * @param array  $parameters Optional parameters
+     *
+     * @return SearchResult
+     */
+    public function textSearch($query, $sensor = false, array $parameters = [])
+    {
+        $search = new Search\TextSearch($parameters + [
+            'query' => $query,
+            'sensor' => $sensor,
+            'key' => $this->apiKey
+          ]
+        );
+        $result = $search->execute();
+        $this->nextPageToken = $result->getNextPageToken();
+
+        return $result;
+    }
+
+    /**
      * @return SearchResult
      */
     public function next()

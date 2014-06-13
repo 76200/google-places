@@ -17,4 +17,9 @@ abstract class Places
      */
     const NEARBY_URL = 'nearbysearch';
 
+    /**
+     * "textsearch" method partial URL
+     */
+    const TEXT_URL = 'textsearch';
+
 }
